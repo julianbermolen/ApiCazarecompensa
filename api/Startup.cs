@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using api.ioc;
+using infraestructura;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -27,8 +29,12 @@ namespace api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var bindings = new Bindings(services);
+            // Add framework services.
+            services.AddScoped<Contexto>(_ => new Contexto(Configuration.GetConnectionString("DefaultConnection")));
             // Add framework services.
             services.AddMvc();
+            bindings.CrearBindings();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
