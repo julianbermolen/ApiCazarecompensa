@@ -1,4 +1,5 @@
 using aplicacion.servicios.abstracciones;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
@@ -13,10 +14,16 @@ namespace api.Controllers
             _usuarioService = UsuarioService;
         }
 
-        [HttpGet]
+        [HttpGet("obtener")]
         public JsonResult Get()
         {
             return Json(_usuarioService.ObtenerUsuarios());
+        }
+
+        [HttpGet("obtenerporid")]
+        public JsonResult ObtenerUsuarioPorIdUsuario(int idUsuario)
+        {
+            return Json(_usuarioService.ObtenerUsuarios().First(x => x.IdUsuario == idUsuario));
         }
         
     }
