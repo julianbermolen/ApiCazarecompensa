@@ -19,5 +19,10 @@ namespace aplicacion.servicios
         {
             return _usuarioRepository.ObtenerUsuarios();
         }
+
+        public void RegistrarUsuario(Usuario usuario)
+        {
+            _usuarioRepository.RegistrarUsuario(usuario);
+        }
     }
 }

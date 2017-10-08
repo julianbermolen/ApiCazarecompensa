@@ -6,5 +6,6 @@ namespace aplicacion.servicios.abstracciones
     public interface IUsuarioService
     {
          List<Usuario> ObtenerUsuarios();
+         void RegistrarUsuario(Usuario usuario);
     }
 }
