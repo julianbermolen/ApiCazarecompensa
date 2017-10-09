@@ -20,10 +20,10 @@ namespace api.Controllers
             return Json(_usuarioService.ObtenerUsuarios());
         }
 
-        [HttpGet("obtenerporid")]
-        public JsonResult ObtenerUsuarioPorIdUsuario(int idUsuario)
+        [HttpGet("obtenerporid/{id}")]
+        public JsonResult ObtenerUsuarioPorIdUsuario(int id)
         {
-            return Json(_usuarioService.ObtenerUsuarios().First(x => x.IdUsuario == idUsuario));
+            return Json(_usuarioService.ObtenerUsuarios().First(x => x.IdUsuario == id));
         }
         
     }

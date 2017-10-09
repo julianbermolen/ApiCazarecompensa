@@ -18,6 +18,8 @@ namespace api.ioc
         {
             _services.AddTransient<IUsuarioService, UsuarioService>();
             _services.AddTransient<IUsuarioRepository, UsuarioRepository>();
+            _services.AddTransient<ITesoroService, TesoroService>();
+            _services.AddTransient<ITesoroRepository, TesoroRepository>();
         }
     }
 }

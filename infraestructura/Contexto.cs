@@ -7,6 +7,7 @@ namespace infraestructura
     {
         private string _connectionString;
         public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Tesoro> Tesoro { get; set; }
 
         public Contexto(string connectionString)
         {
