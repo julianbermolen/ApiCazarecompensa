@@ -15,7 +15,7 @@ namespace api.Controllers
             _tesoroService = tesoroService;
 		}
 
-        [HttpGet("ObtenerTodos")]
+        [HttpGet("obtener")]
         public JsonResult Get()
         {
             return Json(_tesoroService.ObtenerTodos());
