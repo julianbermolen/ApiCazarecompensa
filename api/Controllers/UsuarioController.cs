@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using api.viewmodels;
+using infraestructura.entidades;
 
 namespace api.Controllers
 {
@@ -28,13 +29,27 @@ namespace api.Controllers
             return Json(_usuarioService.ObtenerUsuarios().First(x => x.IdUsuario == id));
         }
 
+        [HttpPost("guardar")]
+        public JsonResult Guardar(Usuario usuario)
+        {
+            try
+            {
+                _usuarioService.Guardar(usuario);
+                return Json( new Respuesta { Exito = true, Mensaje = "Usuario guardado con éxito"});
+            }
+            catch(Exception e)
+            {
+                return Json( new Respuesta { Exito = false, Mensaje = e.Message});
+            }
+        }
+
         [HttpDelete("eliminarporid/{id}")]
         public JsonResult EliminarUsuarioPorId(int id)
         {
             try
             {
                 _usuarioService.EliminarUsuario(id);
-                return Json( new Respuesta { Exito = true, Mensaje = "Tesoro guardado con éxito"});
+                return Json( new Respuesta { Exito = true, Mensaje = "Usuario eliminado con éxito"});
 
             }
             catch(Exception e)

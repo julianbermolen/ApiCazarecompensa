@@ -35,5 +35,11 @@ namespace infraestructura.repositorios
             _contexto.Usuario.Remove(usuario);
             _contexto.SaveChanges();
         }
+
+        public void Guardar(Usuario usuario)
+        {
+            _contexto.Usuario.Add(usuario);
+            _contexto.SaveChanges();
+        }
     }
 }

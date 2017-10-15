@@ -18,6 +18,7 @@ Registrar usuario: POST api/login/registrarUsuario (Se envia por post un usuario
 Obtener todos los usuarios: GET api/usuarios/obtener
 Obtener usuario por IdUsuario: GET api/usuarios/obtenerporid/{id}  donde id: int
 Elminar usuario por IdUsuario: DELETE api/usuarios/eliminarporid/{id} donde id:int
+Guardar usuario: POST api/usuarios/guardar (se le pasa un usuario de tipo Usuario)
 ```
 
 ### Tesoros

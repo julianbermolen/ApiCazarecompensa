@@ -4,6 +4,7 @@ using aplicacion.servicios.abstracciones;
 using infraestructura;
 using infraestructura.entidades;
 using infraestructura.repositorios.abstracciones;
+using System;
 
 namespace aplicacion.servicios
 {
@@ -29,5 +30,21 @@ namespace aplicacion.servicios
         {
             _usuarioRepository.EliminarUsuario(id);
         }
-    }
+		public void Guardar(Usuario usuario)
+		{
+			if(!EsUsuarioRepetido(usuario))
+            {
+                _usuarioRepository.Guardar(usuario);
+            }
+            else 
+            {
+                throw new Exception("El usuario ya se encuentra registrado en el sistema");
+            }
+        }
+
+        private bool EsUsuarioRepetido(Usuario usuario)
+        {
+            return _usuarioRepository.ObtenerUsuarios().Any(x => x.IdFacebook  == usuario.IdFacebook);
+        }
+	}
 }

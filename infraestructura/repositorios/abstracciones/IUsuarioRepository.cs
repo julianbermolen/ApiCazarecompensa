@@ -8,5 +8,6 @@ namespace infraestructura.repositorios.abstracciones
         List<Usuario> ObtenerUsuarios();
         void RegistrarUsuario(Usuario usuario);
         void EliminarUsuario(int id);
+        void Guardar(Usuario usuario);
     }
 }
