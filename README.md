@@ -25,6 +25,7 @@ Guardar usuario: POST api/usuarios/guardar (se le pasa un usuario de tipo Usuari
 ```sh
 Obtener todos los tesoros: GET  api/tesoros/obtener
 Obtener tesoro por IdTesoro: GET api/tesoros/obtenerporid/{id} donde id: int
+Eliminar tesoro por IdTesoro: DELETE api/tesoros/eliminarporid/{id} donde id: int
 ```
 
 

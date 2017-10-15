@@ -34,5 +34,12 @@ namespace infraestructura.repositorios
 			_contexto.Tesoro.Add(tesoro);
             _contexto.SaveChanges();
 		}
+
+		public void Eliminar(int id)
+		{
+			var tesoro = ObtenerPorId(id);
+			_contexto.Tesoro.Remove(tesoro);
+			_contexto.SaveChanges();
+		}
 	}
 }

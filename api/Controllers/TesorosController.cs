@@ -47,5 +47,19 @@ namespace api.Controllers
             }
         }
 
+        [HttpDelete("eliminarporid/{id}")]
+        public JsonResult Eliminar(int id)
+        {
+            try
+            {
+                _tesoroService.Eliminar(id);
+                return Json( new Respuesta { Exito = true, Mensaje = "Tesoro eliminado con éxito"});
+            }
+            catch(Exception e)
+            {
+                return Json( new Respuesta { Exito = false, Mensaje = e.Message});
+            }
+        }
+
     }
 }

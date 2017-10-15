@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using aplicacion.servicios.abstracciones;
 using infraestructura.entidades;
@@ -25,10 +26,25 @@ namespace aplicacion.servicios
 		{
 			_tesoroRepository.Guardar(tesoro);
 		}
-
 		public List<Tesoro> ObtenerPorIdCategoria(int idCategoria)
 		{
 			return _tesoroRepository.ObtenerPorIdCategoria(idCategoria);
+		}
+		public void Eliminar(int id)
+		{
+			if(ExisteTesoro(id))
+			{
+				_tesoroRepository.Eliminar(id);
+			}
+			else
+			{
+				throw new Exception("El tesoro no existe");
+			}
+		}
+
+		private bool ExisteTesoro(int id)
+		{
+			return _tesoroRepository.ObtenerPorId(id) != null;
 		}
 	}
 }
