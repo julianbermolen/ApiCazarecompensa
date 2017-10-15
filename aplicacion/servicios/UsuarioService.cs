@@ -23,7 +23,14 @@ namespace aplicacion.servicios
 
         public void RegistrarUsuario(Usuario usuario)
         {
-            _usuarioRepository.RegistrarUsuario(usuario);
+            if(!EsUsuarioRepetido(usuario))
+            {
+                _usuarioRepository.RegistrarUsuario(usuario);
+            }
+            else 
+            {
+                throw new Exception("El usuario ya se encuentra registrado en el sistema");
+            }
         }
 
         public void EliminarUsuario(int id)
