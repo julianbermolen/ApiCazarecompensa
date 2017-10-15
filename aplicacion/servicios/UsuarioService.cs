@@ -24,5 +24,10 @@ namespace aplicacion.servicios
         {
             _usuarioRepository.RegistrarUsuario(usuario);
         }
+
+        public void EliminarUsuario(int id)
+        {
+            _usuarioRepository.EliminarUsuario(id);
+        }
     }
 }

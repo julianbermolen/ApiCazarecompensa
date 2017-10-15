@@ -17,11 +17,22 @@ namespace infraestructura.repositorios
         {
             return _contexto.Usuario.ToList();
         }
-
         public void RegistrarUsuario(Usuario usuario)
         {
             usuario.FechaCarga = DateTime.Now;
             _contexto.Usuario.Add(usuario);
+            _contexto.SaveChanges();
+        }
+        public void EliminarUsuario(int id)
+        {
+            var usuario = ObtenerUsuarios().FirstOrDefault(x => x.IdUsuario == id);
+
+            if(usuario == null)
+            {
+                throw new Exception("El usuario no existe en el sistema");
+            }
+            
+            _contexto.Usuario.Remove(usuario);
             _contexto.SaveChanges();
         }
     }

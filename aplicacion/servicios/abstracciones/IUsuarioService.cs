@@ -7,5 +7,6 @@ namespace aplicacion.servicios.abstracciones
     {
          List<Usuario> ObtenerUsuarios();
          void RegistrarUsuario(Usuario usuario);
+         void EliminarUsuario(int id);
     }
 }

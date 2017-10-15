@@ -1,6 +1,8 @@
 using aplicacion.servicios.abstracciones;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using api.viewmodels;
 
 namespace api.Controllers
 {
@@ -24,6 +26,21 @@ namespace api.Controllers
         public JsonResult ObtenerUsuarioPorIdUsuario(int id)
         {
             return Json(_usuarioService.ObtenerUsuarios().First(x => x.IdUsuario == id));
+        }
+
+        [HttpDelete("eliminarporid/{id}")]
+        public JsonResult EliminarUsuarioPorId(int id)
+        {
+            try
+            {
+                _usuarioService.EliminarUsuario(id);
+                return Json( new Respuesta { Exito = true, Mensaje = "Tesoro guardado con éxito"});
+
+            }
+            catch(Exception e)
+            {
+                return Json( new Respuesta { Exito = true, Mensaje = e.Message});
+            }
         }
         
     }
