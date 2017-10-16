@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using infraestructura.entidades;
 using infraestructura.repositorios.abstracciones;
+using Microsoft.EntityFrameworkCore;
 
 namespace infraestructura.repositorios
 {
@@ -15,17 +16,25 @@ namespace infraestructura.repositorios
 
 		public List<Tesoro> ObtenerTodos()
 		{
-			return _contexto.Tesoro.OrderByDescending(x => x.FechaCarga).ToList();
+			return _contexto.Tesoro
+			.Include(x => x.TesoroEstado)
+			.Include(x => x.TesoroCategoria)
+			.OrderByDescending(x => x.FechaCarga).ToList();
 		}
 		public Tesoro ObtenerPorId(int idTesoro)
 		{
-			return _contexto.Tesoro.FirstOrDefault(x => x.IdTesoro == idTesoro);
+			return _contexto.Tesoro
+				.Include(x => x.TesoroEstado)
+				.Include(x => x.TesoroCategoria)
+				.FirstOrDefault(x => x.IdTesoro == idTesoro);
 		}
 
         public List<Tesoro> ObtenerPorIdCategoria(int idCategoriaTesoro)
         {
             return _contexto.Tesoro
             .Where(x => x.IdTesoroCategoria == idCategoriaTesoro)
+			.Include(x => x.TesoroEstado)
+			.Include(x => x.TesoroCategoria)
             .OrderByDescending(x => x.FechaCarga)
             .ToList();
         }

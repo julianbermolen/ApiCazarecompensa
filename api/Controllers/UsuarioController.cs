@@ -23,7 +23,7 @@ namespace api.Controllers
             return Json(_usuarioService.ObtenerUsuarios());
         }
 
-        [HttpGet("obtenerporid/{id}")]
+        [HttpGet("obtener/{id}")]
         public JsonResult ObtenerUsuarioPorIdUsuario(int id)
         {
             return Json(_usuarioService.ObtenerUsuarios().First(x => x.IdUsuario == id));
@@ -43,7 +43,7 @@ namespace api.Controllers
             }
         }
 
-        [HttpDelete("eliminarporid/{id}")]
+        [HttpDelete("eliminar/{id}")]
         public JsonResult EliminarUsuarioPorId(int id)
         {
             try

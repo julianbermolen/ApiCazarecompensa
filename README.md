@@ -16,24 +16,24 @@ Registrar usuario: POST api/login/registrarUsuario (Se envia por post un usuario
 ### Publicaciones
 ```sh
 Obtener todos las publicaciones: GET  api/publicaciones/obtener
-Obtener publicación por IdPublicacion: GET api/publicaciones/obtenerporid/{id} donde id: int
-Eliminar publicacion por IdPublicacion: DELETE api/publicaciones/eliminarporid/{id} donde id: int
+Obtener publicación por IdPublicacion: GET api/publicaciones/obtener/{id} donde id: int
+Eliminar publicacion por IdPublicacion: DELETE api/publicaciones/eliminar/{id} donde id: int
 Guardar publicación: POST api/publicaciones/guardar (se le pasa una publicación de tipo Publicacion)
 ```
 
 ### Usuario
 ```sh
 Obtener todos los usuarios: GET api/usuarios/obtener
-Obtener usuario por IdUsuario: GET api/usuarios/obtenerporid/{id}  donde id: int
-Elminar usuario por IdUsuario: DELETE api/usuarios/eliminarporid/{id} donde id:int
+Obtener usuario por IdUsuario: GET api/usuarios/obtener/{id}  donde id: int
+Elminar usuario por IdUsuario: DELETE api/usuarios/eliminar/{id} donde id:int
 Guardar usuario: POST api/usuarios/guardar (se le pasa un usuario de tipo Usuario)
 ```
 
 ### Tesoros
 ```sh
 Obtener todos los tesoros: GET  api/tesoros/obtener
-Obtener tesoro por IdTesoro: GET api/tesoros/obtenerporid/{id} donde id: int
-Eliminar tesoro por IdTesoro: DELETE api/tesoros/eliminarporid/{id} donde id: int
+Obtener tesoro por IdTesoro: GET api/tesoros/obtener/{id} donde id: int
+Eliminar tesoro por IdTesoro: DELETE api/tesoros/eliminar/{id} donde id: int
 ```
 
 

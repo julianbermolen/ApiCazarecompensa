@@ -22,7 +22,7 @@ namespace api.Controllers
             return Json(_publicacionesService.ObtenerTodas());
         }
 
-		[HttpGet("obtenerPorId/{id}")]
+		[HttpGet("obtener/{id}")]
         public JsonResult ObtenerPorIdPublicacion(int id)
         {
             return Json(_publicacionesService.ObtenerPorId(id));
@@ -42,7 +42,7 @@ namespace api.Controllers
             }
         }
 
-        [HttpDelete("eliminarporid/{id}")]
+        [HttpDelete("eliminar/{id}")]
         public JsonResult Eliminar(int id)
         {
             try
