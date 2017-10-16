@@ -21,7 +21,7 @@ namespace api.Controllers
             return Json(_tesoroService.ObtenerTodos());
         }
 
-        [HttpGet("ObtenerPorId/{id}")]
+        [HttpGet("Obtener/{id}")]
         public JsonResult ObtenerPorId(int id)
         {
             return Json(_tesoroService.ObtenerPorId(id));
@@ -47,7 +47,7 @@ namespace api.Controllers
             }
         }
 
-        [HttpDelete("eliminarporid/{id}")]
+        [HttpDelete("eliminar/{id}")]
         public JsonResult Eliminar(int id)
         {
             try
