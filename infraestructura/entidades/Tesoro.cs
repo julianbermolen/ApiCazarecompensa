@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace infraestructura.entidades
 {
@@ -9,7 +10,9 @@ namespace infraestructura.entidades
         public int IdTesoro { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
-        public int IdCategoria { get; set; }
+        [ForeignKey("TesoroCategoria")]
+        public int IdTesoroCategoria { get; set; }
+        [ForeignKey("Usuario")]
         public int IdUsuario { get; set; }
         public decimal Recompensa { get; set; }
         public string Latitud { get; set; }
@@ -17,7 +20,10 @@ namespace infraestructura.entidades
         public string Imagen1 { get; set; }
         public string Imagen2 { get; set; }
         public string Imagen3 { get; set; }
-        public int? IdEstadoTesoro { get; set; }
+        [ForeignKey("TesoroEstado")]
+        public int? IdTesoroEstado { get; set; }
         public DateTime? FechaCarga { get; set; }
+        public virtual TesoroCategoria TesoroCategoria { get; set; }
+        public virtual TesoroEstado TesoroEstado { get; set; }
     }
 }

@@ -13,6 +13,14 @@ Para usar en el ambiente local con un device emulado, apuntar a la dirección 10
 Registrar usuario: POST api/login/registrarUsuario (Se envia por post un usuario de tipo Usuario)
 ```
 
+### Publicaciones
+```sh
+Obtener todos las publicaciones: GET  api/publicaciones/obtener
+Obtener publicación por IdPublicacion: GET api/publicaciones/obtenerporid/{id} donde id: int
+Eliminar publicacion por IdPublicacion: DELETE api/publicaciones/eliminarporid/{id} donde id: int
+Guardar publicación: POST api/publicaciones/guardar (se le pasa una publicación de tipo Publicacion)
+```
+
 ### Usuario
 ```sh
 Obtener todos los usuarios: GET api/usuarios/obtener

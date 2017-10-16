@@ -25,7 +25,7 @@ namespace infraestructura.repositorios
         public List<Tesoro> ObtenerPorIdCategoria(int idCategoriaTesoro)
         {
             return _contexto.Tesoro
-            .Where(x => x.IdCategoria == idCategoriaTesoro)
+            .Where(x => x.IdTesoroCategoria == idCategoriaTesoro)
             .OrderByDescending(x => x.FechaCarga)
             .ToList();
         }
