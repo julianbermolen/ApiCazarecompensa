@@ -11,7 +11,7 @@ namespace infraestructura.entidades
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         [ForeignKey("TesoroCategoria")]
-        public int IdTesoroCategoria { get; set; }
+        public long IdTesoroCategoria { get; set; }
         [ForeignKey("Usuario")]
         public int IdUsuario { get; set; }
         public decimal Recompensa { get; set; }
