@@ -30,6 +30,11 @@ namespace infraestructura.repositorios
 				.FirstOrDefault(x => x.IdTesoro == idTesoro);
 		}
 
+		public List<TesoroCategoria> ObtenerCategoria(){
+			return _contexto.TesoroCategoria
+			.OrderByDescending(x => x.IdTesoroCategoria).ToList();
+		}
+
         public List<Tesoro> ObtenerPorIdCategoria(int idCategoriaTesoro)
         {
             return _contexto.Tesoro

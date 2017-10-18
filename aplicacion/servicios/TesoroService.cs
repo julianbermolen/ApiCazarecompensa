@@ -18,6 +18,7 @@ namespace aplicacion.servicios
 		{
 			return _tesoroRepository.ObtenerTodos();
 		}
+
         public Tesoro ObtenerPorId(int id)
 		{
 			return _tesoroRepository.ObtenerPorId(id);
@@ -26,6 +27,12 @@ namespace aplicacion.servicios
 		{
 			_tesoroRepository.Guardar(tesoro);
 		}
+
+		public List<TesoroCategoria> ObtenerCategoria()
+		{
+			return _tesoroRepository.ObtenerCategoria();
+		}
+		
 		public List<Tesoro> ObtenerPorIdCategoria(int idCategoria)
 		{
 			return _tesoroRepository.ObtenerPorIdCategoria(idCategoria);

@@ -34,6 +34,13 @@ namespace api.Controllers
             return Json(_tesoroService.ObtenerPorIdCategoria(id));
         }
 
+        [HttpGet("ObtenerCategoria")]
+        public JsonResult ObtenerCategoria()
+        {
+            return Json(_tesoroService.ObtenerCategoria());
+        }
+
+
         [HttpPost("guardar")]
         public JsonResult GuardarTesoro(Tesoro tesoro)
         {
