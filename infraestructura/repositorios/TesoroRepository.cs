@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 using System.Linq;
 using infraestructura.entidades;
 using infraestructura.repositorios.abstracciones;
@@ -40,6 +41,7 @@ namespace infraestructura.repositorios
         }
 		public void Guardar(Tesoro tesoro)
 		{
+			tesoro.FechaCarga = DateTime.Now;
 			_contexto.Tesoro.Add(tesoro);
             _contexto.SaveChanges();
 		}
