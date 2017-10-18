@@ -5,6 +5,16 @@ Para usar en el ambiente local con un device real apuntar con la ip de la pc. Am
 
 Para usar en el ambiente local con un device emulado, apuntar a la dirección 10.0.2.2
 
+# ¿Cómo levantar la api?
+
+1. git clone git@github.com:julianbermolen/ApiCazarecompensa.git
+2. cd ApiCazarecompensa
+3. dotnet restore
+4. cd /api
+5. dotnet build
+6. dotnet run
+
+
 # Endpoints
 
 
