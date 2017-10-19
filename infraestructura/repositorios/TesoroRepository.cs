@@ -32,7 +32,7 @@ namespace infraestructura.repositorios
 
 		public List<TesoroCategoria> ObtenerCategoria(){
 			return _contexto.TesoroCategoria
-			.OrderByDescending(x => x.IdTesoroCategoria).ToList();
+			.ToList();
 		}
 
         public List<Tesoro> ObtenerPorIdCategoria(int idCategoriaTesoro)

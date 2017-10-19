@@ -80,8 +80,8 @@ namespace api.Controllers
 
                 using (Image<Rgba32> image = Image.Load<Rgba32>(Convert.FromBase64String(imagen)))
                 {
-                    image.Save("/imagenes/tesoros/1/imagen1.jpg"); // el 1 podría ser el id del tesoro
-                    tesoro.Imagen1 = "/imagenes/tesoros/1/imagen1.jpg"; // piso el encoding con el path de la imagen ya generada
+                    image.Save("imagen1.jpg"); // el 1 podría ser el id del tesoro
+                    tesoro.Imagen1 = "imagen1.jpg"; // piso el encoding con el path de la imagen ya generada
                 }
             }
             if(!string.IsNullOrEmpty(tesoro.Imagen2))
@@ -90,8 +90,8 @@ namespace api.Controllers
 
                 using (Image<Rgba32> image = Image.Load<Rgba32>(Convert.FromBase64String(imagen)))
                 {
-                    image.Save("/imagenes/tesoros/1/imagen2.jpg"); // el 1 podría ser el id del tesoro
-                    tesoro.Imagen2 = "/imagenes/tesoros/1/imagen2.jpg"; // piso el encoding con el path de la imagen ya generada
+                    image.Save("imagen2.jpg"); // el 1 podría ser el id del tesoro
+                    tesoro.Imagen2 = "imagen2.jpg"; // piso el encoding con el path de la imagen ya generada
                 }
             }
             if(!string.IsNullOrEmpty(tesoro.Imagen3))
@@ -100,8 +100,8 @@ namespace api.Controllers
 
                 using (Image<Rgba32> image = Image.Load<Rgba32>(Convert.FromBase64String(imagen)))
                 {
-                    image.Save("/imagenes/tesoros/1/imagen3.jpg"); // el 1 podría ser el id del tesoro
-                    tesoro.Imagen3 = "/imagenes/tesoros/1/imagen3.jpg"; // piso el encoding con el path de la imagen ya generada
+                    image.Save("imagen3.jpg"); // el 1 podría ser el id del tesoro
+                    tesoro.Imagen3 = "imagen3.jpg"; // piso el encoding con el path de la imagen ya generada
                 }
             }
         }
