@@ -3,7 +3,6 @@ using api.viewmodels;
 using aplicacion.servicios.abstracciones;
 using infraestructura.entidades;
 using Microsoft.AspNetCore.Mvc;
-using SixLabors.ImageSharp;
 
 namespace api.Controllers
 {
@@ -44,9 +43,6 @@ namespace api.Controllers
         [HttpPost("guardar")]
         public JsonResult GuardarTesoro(Tesoro tesoro)
         {
-
-            GuardarImagenesEnDisco(tesoro);
-            
             try
             {
                 _tesoroService.Guardar(tesoro);
@@ -71,40 +67,5 @@ namespace api.Controllers
                 return Json( new Respuesta { Exito = false, Mensaje = e.Message});
             }
         }
-
-        private void GuardarImagenesEnDisco(Tesoro tesoro)
-        {
-            if(!string.IsNullOrEmpty(tesoro.Imagen1))
-            {
-                var imagen = tesoro.Imagen1.Replace("data:image/jpeg;base64,", string.Empty);
-
-                using (Image<Rgba32> image = Image.Load<Rgba32>(Convert.FromBase64String(imagen)))
-                {
-                    image.Save("imagen1.jpg"); // el 1 podría ser el id del tesoro
-                    tesoro.Imagen1 = "imagen1.jpg"; // piso el encoding con el path de la imagen ya generada
-                }
-            }
-            if(!string.IsNullOrEmpty(tesoro.Imagen2))
-            {
-                var imagen = tesoro.Imagen2.Replace("data:image/jpeg;base64,", string.Empty);
-
-                using (Image<Rgba32> image = Image.Load<Rgba32>(Convert.FromBase64String(imagen)))
-                {
-                    image.Save("imagen2.jpg"); // el 1 podría ser el id del tesoro
-                    tesoro.Imagen2 = "imagen2.jpg"; // piso el encoding con el path de la imagen ya generada
-                }
-            }
-            if(!string.IsNullOrEmpty(tesoro.Imagen3))
-            {
-                var imagen = tesoro.Imagen3.Replace("data:image/jpeg;base64,", string.Empty);
-
-                using (Image<Rgba32> image = Image.Load<Rgba32>(Convert.FromBase64String(imagen)))
-                {
-                    image.Save("imagen3.jpg"); // el 1 podría ser el id del tesoro
-                    tesoro.Imagen3 = "imagen3.jpg"; // piso el encoding con el path de la imagen ya generada
-                }
-            }
-        }
-
     }
 }
