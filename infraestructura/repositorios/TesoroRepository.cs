@@ -18,6 +18,7 @@ namespace infraestructura.repositorios
 		public List<Tesoro> ObtenerTodos()
 		{
 			return _contexto.Tesoro
+			.Include(x => x.usuario)
 			.Include(x => x.TesoroEstado)
 			.Include(x => x.TesoroCategoria)
 			.OrderByDescending(x => x.FechaCarga).ToList();

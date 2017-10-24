@@ -25,5 +25,6 @@ namespace infraestructura.entidades
         public DateTime? FechaCarga { get; set; }
         public virtual TesoroCategoria TesoroCategoria { get; set; }
         public virtual TesoroEstado TesoroEstado { get; set; }
+        public virtual Usuario usuario{get;set;}
     }
 }

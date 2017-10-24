@@ -16,6 +16,9 @@ namespace aplicacion.servicios
         {
             _usuarioRepository = usuarioRepository;
         }
+        public int getUserId(long idFacebook){
+            return _usuarioRepository.getUserId(idFacebook);
+        }
         public List<Usuario> ObtenerUsuarios()
         {
             return _usuarioRepository.ObtenerUsuarios();

@@ -35,6 +35,10 @@ namespace infraestructura.repositorios
             _contexto.Usuario.Remove(usuario);
             _contexto.SaveChanges();
         }
+        public int getUserId(long idFacebook){
+            var usuario = ObtenerUsuarios().FirstOrDefault(x => x.IdFacebook == idFacebook);
+            return usuario.IdUsuario;
+        }
 
         public void Guardar(Usuario usuario)
         {
