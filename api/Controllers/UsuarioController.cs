@@ -43,8 +43,15 @@ namespace api.Controllers
             }
         }
         [HttpGet("getUserId/{idFacebook}")]
-        public int getUserId(long idFacebook){
-            return (_usuarioService.getUserId(idFacebook));
+        public JsonResult getUserId(long idFacebook){
+            try{
+                int idUsuario = _usuarioService.getUserId(idFacebook);
+                return Json(new Respuesta{Exito = true, Mensaje = "200 Ok", Valor = idUsuario});
+            }
+            catch(Exception e){
+                return Json( new Respuesta{ Exito = false, Mensaje = e.Message});
+            }
+            
         }
 
         [HttpDelete("eliminar/{id}")]
