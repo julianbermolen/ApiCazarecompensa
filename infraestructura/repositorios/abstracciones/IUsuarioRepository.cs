@@ -9,6 +9,6 @@ namespace infraestructura.repositorios.abstracciones
         void RegistrarUsuario(Usuario usuario);
         void EliminarUsuario(int id);
         void Guardar(Usuario usuario);
-        int getUserId(long idFacebook);
+        int getUserId(string idFacebook);
     }
 }

@@ -8,7 +8,7 @@ namespace aplicacion.servicios.abstracciones
          List<Usuario> ObtenerUsuarios();
          void RegistrarUsuario(Usuario usuario);
          void EliminarUsuario(int id);
-         int getUserId(long idFacebook);
+         int getUserId(string idFacebook);
          void Guardar(Usuario usuario);
     }
 }

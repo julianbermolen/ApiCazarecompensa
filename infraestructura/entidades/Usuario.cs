@@ -11,7 +11,7 @@ namespace infraestructura.entidades
         public string Apellido { get; set; }
         public string UrlFoto { get; set; }
         public string Email { get; set; }
-        public long IdFacebook { get; set; }
+        public string IdFacebook { get; set; }
         public DateTime FechaCarga { get; set; }
     }
 }

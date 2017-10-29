@@ -43,7 +43,7 @@ namespace api.Controllers
             }
         }
         [HttpGet("getUserId/{idFacebook}")]
-        public JsonResult getUserId(long idFacebook){
+        public JsonResult getUserId(string idFacebook){
             try{
                 int idUsuario = _usuarioService.getUserId(idFacebook);
                 return Json(new Respuesta{Exito = true, Mensaje = "200 Ok", Valor = idUsuario});
