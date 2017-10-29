@@ -11,6 +11,7 @@ namespace infraestructura
         public DbSet<Publicacion> Publicacion { get; set; }
         public DbSet<TesoroCategoria> TesoroCategoria { get; set; }
         public DbSet<TesoroEstado> TesoroEstado { get; set; }
+        public DbSet<Comentario> Comentario { get; set; }
 
 
         public Contexto(string connectionString)

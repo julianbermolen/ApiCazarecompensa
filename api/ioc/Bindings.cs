@@ -22,6 +22,8 @@ namespace api.ioc
             _services.AddTransient<ITesoroRepository, TesoroRepository>();
             _services.AddTransient<IPublicacionRepository, PublicacionRepository>();
             _services.AddTransient<IPublicacionService, PublicacionService>();
+            _services.AddTransient<IComentarioRepository, ComentarioRepository>();
+            _services.AddTransient<IComentarioService, ComentarioService>();
         }
     }
 }

@@ -1,5 +1,8 @@
 # ApiCazarecompensa
-Api para la App cazaRecompensas
+
+![](logo.png)
+
+Api REST para la App cazaRecompensas
 
 Para usar en el ambiente local con un device real apuntar con la ip de la pc. Ambos dispositivos deben estar en la misma red.
 
@@ -44,6 +47,16 @@ Guardar usuario: POST api/usuarios/guardar (se le pasa un usuario de tipo Usuari
 Obtener todos los tesoros: GET  api/tesoros/obtener
 Obtener tesoro por IdTesoro: GET api/tesoros/obtener/{id} donde id: int
 Eliminar tesoro por IdTesoro: DELETE api/tesoros/eliminar/{id} donde id: int
+```
+
+### Comentarios
+```sh
+Obtener todos los Comentarios: GET  api/comentarios/obtener
+Obtener comentario por IdComentario: GET api/comentarios/obtener/{id} donde id: int
+Obtener comentarios por IdPublicacion: GET api/comentarios/obtener/publicacion/{id} donde id: int
+Obtener Bandeja de entrada por idUsuario: GET api/comentarios/obtener/bandejaEntrada/{id} donde id:int
+Cambiar estado de comentario a "Leido": POST api/comentarios/cambiarEstadoALeido (se le pasa un id:int con el id del comentario)
+Guardar comentario: POST api/comentarios/guardar (se le pasa un comentario de tipo Comentario)
 ```
 
 
