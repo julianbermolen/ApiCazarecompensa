@@ -1,4 +1,4 @@
-# ApiCazarecompensa
+# Api Cazarecompensas
 
 ![](logo.png)
 
@@ -8,7 +8,7 @@ Para usar en el ambiente local con un device real apuntar con la ip de la pc. Am
 
 Para usar en el ambiente local con un device emulado, apuntar a la dirección 10.0.2.2
 
-# ¿Cómo levantar la api?
+# ¿Cómo levantar la api localmente?
 
 1. git clone git@github.com:julianbermolen/ApiCazarecompensa.git
 2. cd ApiCazarecompensa
@@ -16,6 +16,9 @@ Para usar en el ambiente local con un device emulado, apuntar a la dirección 10
 4. cd /api
 5. dotnet build
 6. dotnet run
+
+# UPDATE:
+Ya se encuentra la api en producción: http://li1166-116.members.linode.com/
 
 
 # Endpoints
