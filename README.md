@@ -19,6 +19,9 @@ Para usar en el ambiente local con un device emulado, apuntar a la dirección 10
 
 # UPDATE:
 Ya se encuentra la api en producción: http://li1166-116.members.linode.com/
+```sh
+Ejemplo: http://li1166-116.members.linode.com/api/comentarios/obtener
+```
 
 
 # Endpoints
