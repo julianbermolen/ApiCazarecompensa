@@ -49,7 +49,7 @@ namespace api.Controllers
             {
                 var tesoroGenerado = _tesoroService.Guardar(tesoro);
                 _publicacionService.Guardar(new Publicacion { IdTesoro = tesoroGenerado.IdTesoro } );
-                
+
                 return Json( new Respuesta { Exito = true, Mensaje = "Tesoro guardado  y publicación generada con éxito"});
             }
             catch(Exception e)
@@ -75,7 +75,12 @@ namespace api.Controllers
         [HttpGet("ObtenerIdPublicacionPorIdTesoro/{id}")]
         public JsonResult ObtenerIdPublicacionPorIdTesoro(int id)
         {
-            return Json(new {IdPublicacion = _tesoroService.ObtenerIdPublicacionPorIdTesoro(id)});
+            try {
+                return Json(new {IdPublicacion = _tesoroService.ObtenerIdPublicacionPorIdTesoro(id)});
+            }
+            catch(Exception e) {
+                return Json( new Respuesta { Exito = false, Mensaje = "Ocurrio un error. Puede que el IdTesoro no exista"});
+            }
         }
     }
 }
