@@ -53,6 +53,7 @@ Guardar usuario: POST api/usuarios/guardar (se le pasa un usuario de tipo Usuari
 Obtener todos los tesoros: GET  api/tesoros/obtener
 Obtener tesoro por IdTesoro: GET api/tesoros/obtener/{id} donde id: int
 Eliminar tesoro por IdTesoro: DELETE api/tesoros/eliminar/{id} donde id: int
+Obtener IdPublicacion por IdTesoro: GET /api/tesoros/ObtenerIdPublicacionPorIdTesoro/{id} donde id:int
 ```
 
 ### Comentarios
