@@ -10,9 +10,11 @@ namespace api.Controllers
     public class TesorosController : Controller
     {
         private readonly ITesoroService _tesoroService;
-		public TesorosController(ITesoroService tesoroService)
+        private readonly IPublicacionService _publicacionService;
+		public TesorosController(ITesoroService tesoroService, IPublicacionService publicacionService)
 		{
             _tesoroService = tesoroService;
+            _publicacionService = publicacionService;
 		}
 
         [HttpGet("obtener")]
@@ -45,8 +47,10 @@ namespace api.Controllers
         {
             try
             {
-                _tesoroService.Guardar(tesoro);
-                return Json( new Respuesta { Exito = true, Mensaje = "Tesoro guardado con éxito"});
+                var tesoroGenerado = _tesoroService.Guardar(tesoro);
+                _publicacionService.Guardar(new Publicacion { IdTesoro = tesoroGenerado.IdTesoro } );
+                
+                return Json( new Respuesta { Exito = true, Mensaje = "Tesoro guardado  y publicación generada con éxito"});
             }
             catch(Exception e)
             {
@@ -66,6 +70,12 @@ namespace api.Controllers
             {
                 return Json( new Respuesta { Exito = false, Mensaje = e.Message});
             }
+        }
+
+        [HttpGet("ObtenerIdPublicacionPorIdTesoro/{id}")]
+        public JsonResult ObtenerIdPublicacionPorIdTesoro(int id)
+        {
+            return Json(new {IdPublicacion = _tesoroService.ObtenerIdPublicacionPorIdTesoro(id)});
         }
     }
 }

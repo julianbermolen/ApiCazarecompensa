@@ -24,10 +24,10 @@ namespace aplicacion.servicios
 		{
 			return _tesoroRepository.ObtenerPorId(id);
 		}
-        public void Guardar(Tesoro tesoro)
+        public Tesoro Guardar(Tesoro tesoro)
 		{
 			GuardarImagenesEnDisco(tesoro);
-			_tesoroRepository.Guardar(tesoro);
+			return  _tesoroRepository.Guardar(tesoro);
 		}
 
 		public List<TesoroCategoria> ObtenerCategoria()
@@ -89,5 +89,10 @@ namespace aplicacion.servicios
                 }
             }
         }
+
+		public int ObtenerIdPublicacionPorIdTesoro(int id)
+		{
+			return _tesoroRepository.ObtenerIdPublicacionPorIdTesoro(id);
+		}
 	}
 }

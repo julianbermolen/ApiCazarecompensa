@@ -45,11 +45,12 @@ namespace infraestructura.repositorios
             .OrderByDescending(x => x.FechaCarga)
             .ToList();
         }
-		public void Guardar(Tesoro tesoro)
+		public Tesoro Guardar(Tesoro tesoro)
 		{
 			tesoro.FechaCarga = DateTime.Now;
 			_contexto.Tesoro.Add(tesoro);
             _contexto.SaveChanges();
+			return tesoro;
 		}
 
 		public void Eliminar(int id)
@@ -57,6 +58,11 @@ namespace infraestructura.repositorios
 			var tesoro = ObtenerPorId(id);
 			_contexto.Tesoro.Remove(tesoro);
 			_contexto.SaveChanges();
+		}
+
+		public int ObtenerIdPublicacionPorIdTesoro(int id)
+		{
+			return _contexto.Publicacion.FirstOrDefault(x => x.IdTesoro == id).IdTesoro;
 		}
 	}
 }

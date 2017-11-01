@@ -9,7 +9,8 @@ namespace infraestructura.repositorios.abstracciones
         Tesoro ObtenerPorId(int idTesoro);
         List<Tesoro> ObtenerPorIdCategoria(int idCategoriaTesoro);
         List<TesoroCategoria> ObtenerCategoria();
-        void Guardar(Tesoro tesoro);
+        Tesoro Guardar(Tesoro tesoro);
         void Eliminar(int id);
+        int ObtenerIdPublicacionPorIdTesoro(int id);
     }
 }

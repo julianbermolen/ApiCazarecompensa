@@ -9,8 +9,9 @@ namespace aplicacion.servicios.abstracciones
          Tesoro ObtenerPorId(int id);
          List<Tesoro> ObtenerPorIdCategoria(int idCategoria);
          List<TesoroCategoria> ObtenerCategoria();
-         void Guardar(Tesoro tesoro);
+         Tesoro Guardar(Tesoro tesoro);
          void Eliminar(int id);
+         int ObtenerIdPublicacionPorIdTesoro(int id);
          
     }
 }
