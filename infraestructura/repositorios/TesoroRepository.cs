@@ -62,7 +62,7 @@ namespace infraestructura.repositorios
 
 		public int ObtenerIdPublicacionPorIdTesoro(int id)
 		{
-			return _contexto.Publicacion.FirstOrDefault(x => x.IdTesoro == id).IdTesoro;
+			return _contexto.Publicacion.FirstOrDefault(x => x.IdTesoro == id).IdPublicacion;
 		}
 	}
 }
