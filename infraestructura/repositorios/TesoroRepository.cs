@@ -4,15 +4,20 @@ using System.Linq;
 using infraestructura.entidades;
 using infraestructura.repositorios.abstracciones;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Hosting;
+using SixLabors.ImageSharp;
+using System.IO;
 
 namespace infraestructura.repositorios
 {
 	public class TesoroRepository : ITesoroRepository
 	{
         private readonly Contexto _contexto;
-		public TesoroRepository(Contexto contexto)
+		private readonly IHostingEnvironment _env; 
+		public TesoroRepository(Contexto contexto, IHostingEnvironment env)
 		{
             _contexto = contexto;
+			_env = env;
 		}
 
 		public List<Tesoro> ObtenerTodos()
@@ -51,6 +56,11 @@ namespace infraestructura.repositorios
 			tesoro.IdTesoroEstado = (int)TesoroEstadoEnum.Activo;
 			_contexto.Tesoro.Add(tesoro);
             _contexto.SaveChanges();
+
+			GuardarImagenesEnDisco(tesoro);
+			_contexto.Entry(tesoro).State = EntityState.Modified;
+			_contexto.SaveChanges();
+
 			return tesoro;
 		}
 
@@ -64,6 +74,59 @@ namespace infraestructura.repositorios
 		public int ObtenerIdPublicacionPorIdTesoro(int id)
 		{
 			return _contexto.Publicacion.FirstOrDefault(x => x.IdTesoro == id).IdPublicacion;
+		}
+
+		private void GuardarImagenesEnDisco(Tesoro tesoro)
+        {
+            AddFolderAndImage(tesoro);
+        }
+
+		private void AddFolderAndImage(Tesoro tesoro)
+		{
+			var webRoot = _env.WebRootPath;
+			var PathWithFolderName = System.IO.Path.Combine(webRoot, "tesoros");
+
+
+			if (!Directory.Exists(PathWithFolderName))
+			{
+				DirectoryInfo di = Directory.CreateDirectory(PathWithFolderName);
+			}
+
+			if(!string.IsNullOrEmpty(tesoro.Imagen1))
+			{
+				var imagen = tesoro.Imagen1.Replace("data:image/jpeg;base64,", string.Empty);
+
+				using (Image<Rgba32> image = Image.Load<Rgba32>(Convert.FromBase64String(imagen)))
+				{
+					image.Save(PathWithFolderName + "/" +  tesoro.IdTesoro + "-imagen1.jpg"); // el 1 podría ser el id del tesoro
+					tesoro.Imagen1 = GenerarPath(tesoro.IdTesoro + "-imagen1.jpg");
+				}
+			}
+			if(!string.IsNullOrEmpty(tesoro.Imagen2))
+			{
+				var imagen = tesoro.Imagen2.Replace("data:image/jpeg;base64,", string.Empty);
+
+				using (Image<Rgba32> image = Image.Load<Rgba32>(Convert.FromBase64String(imagen)))
+				{
+					image.Save(PathWithFolderName + "/" + tesoro.IdTesoro + "-imagen2.jpg"); // el 1 podría ser el id del tesoro
+					tesoro.Imagen2 = GenerarPath(tesoro.IdTesoro + "-imagen2.jpg");
+				}
+			}
+			if(!string.IsNullOrEmpty(tesoro.Imagen3))
+			{
+				var imagen = tesoro.Imagen3.Replace("data:image/jpeg;base64,", string.Empty);
+
+				using (Image<Rgba32> image = Image.Load<Rgba32>(Convert.FromBase64String(imagen)))
+				{
+					image.Save(PathWithFolderName + "/" + tesoro.IdTesoro + "-imagen3.jpg"); // el 1 podría ser el id del tesoro
+					tesoro.Imagen3 = GenerarPath(tesoro.IdTesoro + "-imagen3.jpg");
+				}
+			}
+		}
+
+		private string GenerarPath(string nombreImagen)
+		{
+				return string.Format("http://li1166-116.members.linode.com/tesoros/{0}", nombreImagen);
 		}
 	}
 

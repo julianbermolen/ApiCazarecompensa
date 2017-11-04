@@ -10,5 +10,7 @@
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0"/>
     <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.0.0"/>
+    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0001"/>
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta0001"/>
   </ItemGroup>
 </Project>
