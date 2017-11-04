@@ -54,7 +54,7 @@ namespace api.Controllers
             }
             catch(Exception e)
             {
-                return Json( new Respuesta { Exito = false, Mensaje = e.Message, StackTrace = e.StackTrace, InnerException = e.InnerException.Message });
+                return Json( new Respuesta { Exito = false, Mensaje = e.Message + " STACKTRACE:" + e.StackTrace });
             }
         }
 
