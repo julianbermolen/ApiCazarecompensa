@@ -48,6 +48,7 @@ namespace infraestructura.repositorios
 		public Tesoro Guardar(Tesoro tesoro)
 		{
 			tesoro.FechaCarga = DateTime.Now;
+			tesoro.IdTesoroEstado = (int)TesoroEstadoEnum.Activo;
 			_contexto.Tesoro.Add(tesoro);
             _contexto.SaveChanges();
 			return tesoro;
@@ -64,5 +65,11 @@ namespace infraestructura.repositorios
 		{
 			return _contexto.Publicacion.FirstOrDefault(x => x.IdTesoro == id).IdPublicacion;
 		}
+	}
+
+	enum TesoroEstadoEnum {
+		Activo = 1,
+		Finalizado = 2,
+		Cancelado = 3	
 	}
 }
