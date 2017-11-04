@@ -88,7 +88,7 @@ namespace aplicacion.servicios
 
 				using (Image<Rgba32> image = Image.Load<Rgba32>(Convert.FromBase64String(imagen)))
 				{
-					image.Save(PathWithFolderName + "/" +  tesoro.IdTesoro + "imagen1.jpg"); // el 1 podría ser el id del tesoro
+					image.Save(PathWithFolderName + "/" +  tesoro.IdTesoro + "-imagen1.jpg"); // el 1 podría ser el id del tesoro
 					tesoro.Imagen1 = GenerarPath(tesoro.IdTesoro + "-imagen1.jpg");
 				}
 			}
@@ -98,7 +98,7 @@ namespace aplicacion.servicios
 
 				using (Image<Rgba32> image = Image.Load<Rgba32>(Convert.FromBase64String(imagen)))
 				{
-					image.Save(PathWithFolderName + "/" + tesoro.IdTesoro + "imagen2.jpg"); // el 1 podría ser el id del tesoro
+					image.Save(PathWithFolderName + "/" + tesoro.IdTesoro + "-imagen2.jpg"); // el 1 podría ser el id del tesoro
 					tesoro.Imagen2 = GenerarPath(tesoro.IdTesoro + "-imagen2.jpg");
 				}
 			}
@@ -108,7 +108,7 @@ namespace aplicacion.servicios
 
 				using (Image<Rgba32> image = Image.Load<Rgba32>(Convert.FromBase64String(imagen)))
 				{
-					image.Save(PathWithFolderName + "/" + tesoro.IdTesoro + "imagen3.jpg"); // el 1 podría ser el id del tesoro
+					image.Save(PathWithFolderName + "/" + tesoro.IdTesoro + "-imagen3.jpg"); // el 1 podría ser el id del tesoro
 					tesoro.Imagen3 = GenerarPath(tesoro.IdTesoro + "-imagen3.jpg");
 				}
 			}
