@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using SixLabors.ImageSharp;
 using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace infraestructura.repositorios
 {
@@ -52,12 +53,17 @@ namespace infraestructura.repositorios
         }
 		public Tesoro Guardar(Tesoro tesoro)
 		{
+			Dictionary<string, string> encodings = new  Dictionary<string, string>();
+
 			tesoro.FechaCarga = DateTime.Now;
 			tesoro.IdTesoroEstado = (int)TesoroEstadoEnum.Activo;
+
+			GuardarEncodings(encodings, tesoro);
+
 			_contexto.Tesoro.Add(tesoro);
             _contexto.SaveChanges();
 
-			GuardarImagenesEnDisco(tesoro);
+			GuardarImagenesEnDisco(encodings, tesoro);
 			_contexto.Entry(tesoro).State = EntityState.Modified;
 			_contexto.SaveChanges();
 
@@ -76,12 +82,17 @@ namespace infraestructura.repositorios
 			return _contexto.Publicacion.FirstOrDefault(x => x.IdTesoro == id).IdPublicacion;
 		}
 
-		private void GuardarImagenesEnDisco(Tesoro tesoro)
-        {
-            AddFolderAndImage(tesoro);
-        }
+		private void GuardarEncodings(Dictionary<string, string> encodings, Tesoro tesoro)
+		{
+			encodings.Add("imagen1", tesoro.Imagen1);
+			tesoro.Imagen1 = string.Empty;
+			encodings.Add("imagen2", tesoro.Imagen2);
+			tesoro.Imagen2 = string.Empty;
+			encodings.Add("imagen3", tesoro.Imagen3);
+			tesoro.Imagen3 = string.Empty;
+		}
 
-		private void AddFolderAndImage(Tesoro tesoro)
+		private void GuardarImagenesEnDisco(Dictionary<string, string> encodings, Tesoro tesoro)
 		{
 			var webRoot = _env.WebRootPath;
 			var PathWithFolderName = System.IO.Path.Combine(webRoot, "tesoros");
@@ -92,35 +103,18 @@ namespace infraestructura.repositorios
 				DirectoryInfo di = Directory.CreateDirectory(PathWithFolderName);
 			}
 
-			if(!string.IsNullOrEmpty(tesoro.Imagen1))
+			foreach(var encoding in encodings)
 			{
-				var imagen = tesoro.Imagen1.Replace("data:image/jpeg;base64,", string.Empty);
-
-				using (Image<Rgba32> image = Image.Load<Rgba32>(Convert.FromBase64String(imagen)))
+				if(!string.IsNullOrEmpty(encoding.Value))
 				{
-					image.Save(PathWithFolderName + "/" +  tesoro.IdTesoro + "-imagen1.jpg");
-				}
-				tesoro.Imagen1 = GenerarPath(tesoro.IdTesoro + "-imagen1.jpg");
-			}
-			if(!string.IsNullOrEmpty(tesoro.Imagen2))
-			{
-				var imagen = tesoro.Imagen2.Replace("data:image/jpeg;base64,", string.Empty);
+					var imagen = encoding.Value.Replace("data:image/jpeg;base64,", string.Empty);
 
-				using (Image<Rgba32> image = Image.Load<Rgba32>(Convert.FromBase64String(imagen)))
-				{
-					image.Save(PathWithFolderName + "/" + tesoro.IdTesoro + "-imagen2.jpg");
+					using (Image<Rgba32> image = Image.Load<Rgba32>(Convert.FromBase64String(imagen)))
+					{
+						image.Save(string.Format("{0}/{1}-{2}.jpg", PathWithFolderName, tesoro.IdTesoro, encoding.Key));
+					}
+					tesoro.Imagen1 = GenerarPath(tesoro.IdTesoro + "-" + encoding.Key + ".jpg");
 				}
-				tesoro.Imagen2 = GenerarPath(tesoro.IdTesoro + "-imagen2.jpg");
-			}
-			if(!string.IsNullOrEmpty(tesoro.Imagen3))
-			{
-				var imagen = tesoro.Imagen3.Replace("data:image/jpeg;base64,", string.Empty);
-
-				using (Image<Rgba32> image = Image.Load<Rgba32>(Convert.FromBase64String(imagen)))
-				{
-					image.Save(PathWithFolderName + "/" + tesoro.IdTesoro + "-imagen3.jpg");
-				}
-				tesoro.Imagen3 = GenerarPath(tesoro.IdTesoro + "-imagen3.jpg");
 			}
 		}
 
