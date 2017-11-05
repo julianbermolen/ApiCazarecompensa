@@ -98,9 +98,9 @@ namespace infraestructura.repositorios
 
 				using (Image<Rgba32> image = Image.Load<Rgba32>(Convert.FromBase64String(imagen)))
 				{
-					image.Save(PathWithFolderName + "/" +  tesoro.IdTesoro + "-imagen1.jpg"); // el 1 podría ser el id del tesoro
-					tesoro.Imagen1 = GenerarPath(tesoro.IdTesoro + "-imagen1.jpg");
+					image.Save(PathWithFolderName + "/" +  tesoro.IdTesoro + "-imagen1.jpg");
 				}
+				tesoro.Imagen1 = GenerarPath(tesoro.IdTesoro + "-imagen1.jpg");
 			}
 			if(!string.IsNullOrEmpty(tesoro.Imagen2))
 			{
@@ -108,9 +108,9 @@ namespace infraestructura.repositorios
 
 				using (Image<Rgba32> image = Image.Load<Rgba32>(Convert.FromBase64String(imagen)))
 				{
-					image.Save(PathWithFolderName + "/" + tesoro.IdTesoro + "-imagen2.jpg"); // el 1 podría ser el id del tesoro
-					tesoro.Imagen2 = GenerarPath(tesoro.IdTesoro + "-imagen2.jpg");
+					image.Save(PathWithFolderName + "/" + tesoro.IdTesoro + "-imagen2.jpg");
 				}
+				tesoro.Imagen2 = GenerarPath(tesoro.IdTesoro + "-imagen2.jpg");
 			}
 			if(!string.IsNullOrEmpty(tesoro.Imagen3))
 			{
@@ -118,15 +118,15 @@ namespace infraestructura.repositorios
 
 				using (Image<Rgba32> image = Image.Load<Rgba32>(Convert.FromBase64String(imagen)))
 				{
-					image.Save(PathWithFolderName + "/" + tesoro.IdTesoro + "-imagen3.jpg"); // el 1 podría ser el id del tesoro
-					tesoro.Imagen3 = GenerarPath(tesoro.IdTesoro + "-imagen3.jpg");
+					image.Save(PathWithFolderName + "/" + tesoro.IdTesoro + "-imagen3.jpg");
 				}
+				tesoro.Imagen3 = GenerarPath(tesoro.IdTesoro + "-imagen3.jpg");
 			}
 		}
 
 		private string GenerarPath(string nombreImagen)
 		{
-				return string.Format("http://li1166-116.members.linode.com/tesoros/{0}", nombreImagen);
+			return string.Format("http://li1166-116.members.linode.com/tesoros/{0}", nombreImagen);
 		}
 	}
 
