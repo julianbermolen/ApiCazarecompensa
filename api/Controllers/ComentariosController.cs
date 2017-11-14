@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using api.viewmodels;
 using aplicacion.servicios.abstracciones;
 using infraestructura.entidades;
@@ -10,9 +11,12 @@ namespace api.Controllers
     public class ComentariosController : Controller
     {
         private readonly IComentarioService _comentarioService;
-        public ComentariosController(IComentarioService comentarioService)
+        private readonly IUsuarioService _usuarioService;
+
+        public ComentariosController(IComentarioService comentarioService, IUsuarioService usuarioService)
         {
             _comentarioService = comentarioService;
+            _usuarioService = usuarioService;
         }
 
         [HttpGet("obtener")]
@@ -36,7 +40,26 @@ namespace api.Controllers
 		[HttpGet("obtener/bandejaEntrada/{id}")]
         public JsonResult ObtenerBandejaEntrada(int id)
         {
-            return Json(_comentarioService.ObtenerBandejaEntrada(id));
+            var comentarios  = _comentarioService.ObtenerBandejaEntrada(id);
+            var comentariosViewModel = new List<ComentarioViewModel>();
+
+            foreach (Comentario comentario in comentarios)
+            {
+                comentariosViewModel.Add(new ComentarioViewModel() {
+                    IdComentario = comentario.IdComentario,
+                    IdUsuarioEmisor = comentario.IdUsuarioEmisor,
+                    IdUsuarioReceptor = comentario.IdUsuarioReceptor,
+                    IdPublicacion = comentario.IdUsuarioReceptor,
+                    Detalle = comentario.Detalle,
+                    Imagen = comentario.Imagen,
+                    MensajeLeido = comentario.MensajeLeido,
+                    FechaCarga = comentario.FechaCarga,
+                    Publicacion = comentario.Publicacion,
+                    UsuarioEmisor = _usuarioService.ObtenerUsuarioPorIdUsuario(comentario.IdUsuarioEmisor)
+                });
+            }
+
+            return Json(comentariosViewModel);
         }
 
         [HttpPost("cambiarEstadoALeido")]

@@ -9,6 +9,7 @@ namespace infraestructura.repositorios
     public class UsuarioRepository : IUsuarioRepository
     {
         private readonly Contexto _contexto;
+
         public UsuarioRepository(Contexto contexto)
         {
             _contexto = contexto;
@@ -35,6 +36,11 @@ namespace infraestructura.repositorios
             _contexto.Usuario.Remove(usuario);
             _contexto.SaveChanges();
         }
+        public Usuario ObtenerUsuarioPorIdUsuario(int idUsuario)
+        {
+            return _contexto.Usuario.FirstOrDefault(x => x.IdUsuario == idUsuario);
+        }
+
         public int getUserId(string idFacebook){
             var usuario = ObtenerUsuarios().FirstOrDefault(x => x.IdFacebook == idFacebook);
             return usuario.IdUsuario;
