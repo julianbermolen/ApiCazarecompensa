@@ -43,7 +43,7 @@ Guardar publicación: POST api/publicaciones/guardar (se le pasa una publicació
 ### Usuario
 ```sh
 Obtener todos los usuarios: GET api/usuarios/obtener
-Obtener usuario por IdUsuario: GET api/usuarios/obtener/{id}  donde id: int
+Obtener usuario por IdUsuario: GPeticionRecompensaET api/usuarios/obtener/{id}  donde id: int
 Elminar usuario por IdUsuario: DELETE api/usuarios/eliminar/{id} donde id:int
 Guardar usuario: POST api/usuarios/guardar (se le pasa un usuario de tipo Usuario)
 ```
@@ -64,6 +64,14 @@ Obtener comentarios por IdPublicacion: GET api/comentarios/obtener/publicacion/{
 Obtener Bandeja de entrada por idUsuario: GET api/comentarios/obtener/bandejaEntrada/{id} donde id:int
 Cambiar estado de comentario a "Leido": POST api/comentarios/cambiarEstadoALeido (se le pasa un id:int con el id del comentario)
 Guardar comentario: POST api/comentarios/guardar (se le pasa un comentario de tipo Comentario)
+```
+
+### Peticiones de recompensa
+```sh
+Obtener las peticiones donde mi tesoro existe : GET  api/obtenerPorIdUsuario/{id}
+Guarda Peticion: POST api/guardar (se le pasa una PeticionRecompensa)
+Actualizar estadp de petición: POST actualizarEstado (se le pasa idUsuario, idTesoro, estado)
+
 ```
 
 
