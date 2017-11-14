@@ -68,10 +68,9 @@ Guardar comentario: POST api/comentarios/guardar (se le pasa un comentario de ti
 
 ### Peticiones de recompensa
 ```sh
-Obtener las peticiones donde mi tesoro existe : GET  api/obtenerPorIdUsuario/{id}
-Guarda Peticion: POST api/guardar (se le pasa una PeticionRecompensa)
-Actualizar estadp de petición: POST actualizarEstado (se le pasa idUsuario, idTesoro, estado)
-
+Obtener las peticiones donde mi tesoro existe : GET  api/PeticionRecompensa/obtenerPorIdUsuario/{id}
+Guarda Peticion: POST api/PeticionRecompensa/guardar (se le pasa una PeticionRecompensa)
+Actualizar estadp de petición: POST api/PeticionRecompensa/actualizarEstado (se le pasa idUsuario, idTesoro, estado)
 ```
 
 
