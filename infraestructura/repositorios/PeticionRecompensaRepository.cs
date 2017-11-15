@@ -34,6 +34,7 @@ namespace infraestructura.repositorios
 		{
 			return _contexto.PeticionRecompensa
 			.Include(x => x.Tesoro)
+			.Include(x => x.Usuario)
 			.FirstOrDefault(x => x.IdUsuario == id);
 		}
 

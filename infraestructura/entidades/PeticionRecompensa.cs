@@ -7,10 +7,12 @@ namespace infraestructura.entidades
     {
         [Key]
         public int IdPeticionRecompensa {get; set;}
+        [ForeignKey("Usuario")]
         public int IdUsuario {get; set;}
         [ForeignKey("Tesoro")]
         public int IdTesoro {get; set;}
         public int Estado {get; set;}
         public virtual Tesoro Tesoro { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }
