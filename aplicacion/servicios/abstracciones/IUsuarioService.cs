@@ -10,5 +10,6 @@ namespace aplicacion.servicios.abstracciones
          void EliminarUsuario(int id);
          int getUserId(string idFacebook);
          void Guardar(Usuario usuario);
+         Usuario ObtenerUsuarioPorIdUsuario(int idUsuario);
     }
 }

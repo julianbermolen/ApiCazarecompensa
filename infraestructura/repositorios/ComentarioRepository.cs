@@ -10,15 +10,17 @@ namespace infraestructura.repositorios
 	public class ComentarioRepository : IComentarioRepository
 	{
         private readonly Contexto _contexto;
-		public ComentarioRepository(Contexto contexto)
+		private readonly IUsuarioRepository _usuarioRepository;
+
+		public ComentarioRepository(Contexto contexto, IUsuarioRepository usuarioRepository)
 		{
             _contexto = contexto;
+			_usuarioRepository = usuarioRepository;
 		}
 
         public List<Comentario> ObtenerTodos()
 		{
 			return _contexto.Comentario
-                .Include(x => x.Usuario)
                 .Include(x => x.Publicacion)
                 .OrderByDescending(x => x.FechaCarga)
                 .ToList();
@@ -28,7 +30,6 @@ namespace infraestructura.repositorios
 		{
 			return _contexto.Comentario
                 .Where(x => x.IdPublicacion == idPublicacion)
-                .Include(x => x.Usuario)
                 .OrderByDescending(x => x.FechaCarga)
                 .ToList();
 		}
@@ -36,18 +37,18 @@ namespace infraestructura.repositorios
 		public Comentario ObtenerPorIdComentario(int idComentario)
 		{
 			return _contexto.Comentario
-			    .Include(x => x.Usuario)
                 .Include(x => x.Publicacion)
             	.FirstOrDefault(x => x.IdComentario == idComentario);
 		}
-        public List<Comentario> ObtenerBandejaEntrada(int idUsuario)
+        public List<Comentario> ObtenerBandejaEntrada(int idUsuarioReceptor)
 		{
-			return _contexto.Comentario
-                .Include(x => x.Usuario)
+				return  _contexto.Comentario
+				.Where(x => x.IdUsuarioReceptor == idUsuarioReceptor)
                 .Include(x => x.Publicacion)
+					.ThenInclude(pub => pub.Tesoro)
 				.OrderByDescending(x => x.MensajeLeido)
                 .OrderByDescending(x => x.FechaCarga)
-                .ToList();
+				.ToList();
 		}
         public void Guardar(Comentario comentario)
 		{

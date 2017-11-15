@@ -52,6 +52,11 @@ namespace aplicacion.servicios
             }
         }
 
+        public Usuario ObtenerUsuarioPorIdUsuario(int idUsuario)
+        {
+            return _usuarioRepository.ObtenerUsuarioPorIdUsuario(idUsuario);
+        }
+
         private bool EsUsuarioRepetido(Usuario usuario)
         {
             return _usuarioRepository.ObtenerUsuarios().Any(x => x.IdFacebook  == usuario.IdFacebook);
