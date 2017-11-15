@@ -32,7 +32,9 @@ namespace infraestructura.repositorios
 
 		public PeticionRecompensa ObtenerPorIdUsuario(int id)
 		{
-			return _contexto.PeticionRecompensa.FirstOrDefault(x => x.IdUsuario == id);
+			return _contexto.PeticionRecompensa
+			.Include(x => x.Tesoro)
+			.FirstOrDefault(x => x.IdUsuario == id);
 		}
 
 		public List<PeticionRecompensa> ObtenerTodas()
