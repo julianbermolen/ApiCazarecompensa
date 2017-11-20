@@ -9,7 +9,7 @@ namespace infraestructura.repositorios.abstracciones
          Comentario ObtenerPorIdComentario(int id);
          List<Comentario> ObtenerComentariosPorIdPublicacion(int idPublicacion);
          void Guardar(Comentario comentario);
-         List<Comentario> ObtenerBandejaEntrada(int idUsuario);
+         List<Dictionary<int, List<Comentario>>> ObtenerBandejaEntrada(int idUsuario);
         void CambiarAComentarioLeido(int idComentario);
     }
 }

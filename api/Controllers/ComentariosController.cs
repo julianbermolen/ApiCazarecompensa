@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using api.viewmodels;
 using aplicacion.servicios.abstracciones;
@@ -18,7 +19,7 @@ namespace api.Controllers
             _comentarioService = comentarioService;
             _usuarioService = usuarioService;
         }
-
+        
         [HttpGet("obtener")]
         public JsonResult Obtener()
         {
@@ -41,25 +42,8 @@ namespace api.Controllers
         public JsonResult ObtenerBandejaEntrada(int id)
         {
             var comentarios  = _comentarioService.ObtenerBandejaEntrada(id);
-            var comentariosViewModel = new List<ComentarioViewModel>();
 
-            foreach (Comentario comentario in comentarios)
-            {
-                comentariosViewModel.Add(new ComentarioViewModel() {
-                    IdComentario = comentario.IdComentario,
-                    IdUsuarioEmisor = comentario.IdUsuarioEmisor,
-                    IdUsuarioReceptor = comentario.IdUsuarioReceptor,
-                    IdPublicacion = comentario.IdUsuarioReceptor,
-                    Detalle = comentario.Detalle,
-                    Imagen = comentario.Imagen,
-                    MensajeLeido = comentario.MensajeLeido,
-                    FechaCarga = comentario.FechaCarga,
-                    Publicacion = comentario.Publicacion,
-                    UsuarioEmisor = _usuarioService.ObtenerUsuarioPorIdUsuario(comentario.IdUsuarioEmisor)
-                });
-            }
-
-            return Json(comentariosViewModel);
+            return Json(comentarios);
         }
 
         [HttpPost("cambiarEstadoALeido")]

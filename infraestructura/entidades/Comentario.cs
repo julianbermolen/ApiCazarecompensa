@@ -17,6 +17,7 @@ namespace infraestructura.entidades
         public string Detalle { get; set; }
         public string Imagen { get; set; }
         public bool MensajeLeido { get; set; }
+        public int NumeroConversacion { get; set; }
         public DateTime FechaCarga { get; set; }
         public virtual Publicacion Publicacion { get; set; }
     }
