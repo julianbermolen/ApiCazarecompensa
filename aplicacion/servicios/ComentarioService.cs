@@ -22,7 +22,7 @@ namespace aplicacion.servicios
 			_comentarioRepository.Guardar(comentario);
 		}
 
-		public List<Dictionary<int, List<Comentario>>> ObtenerBandejaEntrada(int idUsuario)
+		public List<Dictionary<int, List<ComentarioViewModel>>> ObtenerBandejaEntrada(int idUsuario)
 		{
 			return _comentarioRepository.ObtenerBandejaEntrada(idUsuario);
 		}

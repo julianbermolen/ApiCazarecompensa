@@ -43,7 +43,7 @@ namespace infraestructura.repositorios
             	.FirstOrDefault(x => x.IdComentario == idComentario);
 		}
 
-        public List<Dictionary<int, List<Comentario>>> ObtenerBandejaEntrada(int idUsuario)
+        public List<Dictionary<int, List<ComentarioViewModel>>> ObtenerBandejaEntrada(int idUsuario)
 		{
 
 			// Se obtienen todas las publicaciones del usuario
@@ -55,7 +55,7 @@ namespace infraestructura.repositorios
 
 			if(publicaciones.Length == 0)
 			{
-				return new List<Dictionary<int, List<Comentario>>>();
+				return new List<Dictionary<int, List<ComentarioViewModel>>>();
 			}
 
 			var conversaciones = _contexto.Comentario
@@ -66,7 +66,7 @@ namespace infraestructura.repositorios
 
 			if(conversaciones.Count() == 0)
 			{
-				return new List<Dictionary<int, List<Comentario>>>();
+				return new List<Dictionary<int, List<ComentarioViewModel>>>();
 			}
 
 			List<Dictionary<int, List<Comentario>>> lista = new List<Dictionary<int, List<Comentario>>>();
@@ -100,8 +100,7 @@ namespace infraestructura.repositorios
 			dic.Add(conversacionAnterior.NumeroConversacion, listaConversaciones);
 			lista.Add(dic);
 
-			return lista;
-
+			return AgregarUsuarioEmisoresYReceptores(lista);
 		}
 
         public void Guardar(Comentario comentario)
@@ -149,5 +148,56 @@ namespace infraestructura.repositorios
 			}
 			
 		}
+
+		private List<Dictionary<int, List<ComentarioViewModel>>> AgregarUsuarioEmisoresYReceptores(List<Dictionary<int, List<Comentario>>> lista)
+		{
+			var listadoViewModel = new List<Dictionary<int, List<ComentarioViewModel>>>();
+			var itemViewModel = new Dictionary<int, List<ComentarioViewModel>>();
+			var temp = new Dictionary<int, List<ComentarioViewModel>>();
+
+			foreach(var diccionario in lista)
+			{
+				itemViewModel.Clear();
+				foreach(var item in diccionario)
+				{
+					itemViewModel.Add(item.Key, MapearComentario(item.Value));	
+				};
+
+				temp = itemViewModel;
+				listadoViewModel.Add(temp);
+			}
+
+			return listadoViewModel;
+		
+		}
+
+
+		private List<ComentarioViewModel> MapearComentario(List<Comentario> listadoComentarios)
+		{
+			List<ComentarioViewModel> listadoNuevo = new List<ComentarioViewModel>();
+
+			foreach (var x in listadoComentarios)
+			{
+				var comentarioViewModel = new ComentarioViewModel
+				{
+					IdComentario = x.IdComentario,
+					IdUsuarioEmisor = x.IdUsuarioEmisor,
+					IdUsuarioReceptor = x.IdUsuarioReceptor,
+					IdPublicacion = x.IdPublicacion,
+					Detalle = x.Detalle,
+					Imagen = x.Imagen,
+					MensajeLeido = x.MensajeLeido,
+					NumeroConversacion = x.NumeroConversacion,
+					FechaCarga = x.FechaCarga,
+					UsuarioEmisor = _usuarioRepository.ObtenerUsuarioPorIdUsuario(x.IdUsuarioEmisor),
+					UsuarioReceptor = _usuarioRepository.ObtenerUsuarioPorIdUsuario(x.IdUsuarioReceptor)
+				};
+
+				listadoNuevo.Add(comentarioViewModel);
+			}
+
+			return listadoNuevo;
+		}
+
 	}
 }
