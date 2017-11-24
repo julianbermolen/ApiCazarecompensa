@@ -123,7 +123,7 @@ namespace infraestructura.repositorios
 
 		private void ObtenerNumeroConversacion(Comentario comentario)
 		{
-			var  numeroConversacion = _contexto
+			var numeroConversacion = _contexto
 				.Comentario.Where(x => x.IdPublicacion == comentario.IdPublicacion 
 				&& (x.IdUsuarioEmisor == comentario.IdUsuarioEmisor && x.IdUsuarioReceptor == comentario.IdUsuarioReceptor)  ||
 				 (x.IdUsuarioEmisor == comentario.IdUsuarioReceptor && x.IdUsuarioReceptor == comentario.IdUsuarioEmisor))

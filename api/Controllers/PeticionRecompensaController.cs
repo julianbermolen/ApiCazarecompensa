@@ -43,7 +43,7 @@ namespace api.Controllers
         }
 
         [HttpGet("obtenerPorIdUsuarioQueSolicitoRecompensa/{id}")]
-        public JsonResult ObtenerPorIdUsuario(int id)
+        public JsonResult ObtenerPorIdUsuarioQueSolicitoRecompensa(int id)
         {
             var resultado = new List<PeticionRecompensa>();
 
