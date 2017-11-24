@@ -39,9 +39,33 @@ namespace api.Controllers
                 }
             }
 
-            return Json(resultado);
-            
+            return Json(resultado.Where(x => x.Estado == 1));
         }
+
+        [HttpGet("obtenerPorIdUsuarioQueSolicitoRecompensa/{id}")]
+        public JsonResult ObtenerPorIdUsuario(int id)
+        {
+            var resultado = new List<PeticionRecompensa>();
+
+            var tesoros = _tesoroService.ObtenerTodos().Where(x => x.IdUsuario == id);
+
+            var peticiones  = _peticionRecompensaService.ObtenerTodas();
+
+            if(tesoros != null && tesoros.Count() > 0)
+            {
+                foreach (PeticionRecompensa peticion in peticiones)
+                {
+                    if(id == peticion.IdUsuario && peticion.Estado == 2) {
+                        resultado.Add(peticion);
+                    }
+                }
+            }
+
+            return Json(resultado);
+        }
+
+
+        // filtrar por idusuario y que solamente filtre por el estado 2 
 
 		[HttpPost("guardar")]
         public JsonResult Guardar(int idUsuario, int idTesoro, int estado)
