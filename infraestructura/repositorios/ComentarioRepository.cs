@@ -58,6 +58,8 @@ namespace infraestructura.repositorios
 				return new List<Dictionary<int, List<ComentarioViewModel>>>();
 			}
 
+			// esto son los todos los comentarios que se hicieron en las publicaciones del
+			// usuario en cuestion
 			var conversaciones = _contexto.Comentario
 			.Where(x => publicaciones.Contains(x.IdPublicacion))
 			.OrderByDescending(x => x.FechaCarga)
@@ -69,12 +71,13 @@ namespace infraestructura.repositorios
 				return new List<Dictionary<int, List<ComentarioViewModel>>>();
 			}
 
-			List<Dictionary<int, List<Comentario>>> lista = new List<Dictionary<int, List<Comentario>>>();
+			List<Dictionary<int, List<Comentario>>> resultado = new List<Dictionary<int, List<Comentario>>>();
 			var listaConversaciones = new List<Comentario>();
 
 			var conversacionAnterior = conversaciones.First() ?? new Comentario();
 
-			foreach(var conversacion in conversaciones)
+			
+			foreach(var conversacion in conversaciones) // por cada comentario relacionado a una publicacion del usuario ....
 			{
 				if(conversacionAnterior.NumeroConversacion == conversacion.NumeroConversacion)
 				{
@@ -87,7 +90,7 @@ namespace infraestructura.repositorios
 					List<Comentario> listaComversacionesTemp = new List<Comentario>();
 					listaComversacionesTemp.AddRange(listaConversaciones);
 					diccionario.Add(conversacionAnterior.NumeroConversacion, listaComversacionesTemp);
-					lista.Add(diccionario);
+					resultado.Add(diccionario);
 
 					conversacionAnterior = conversacion;
 					listaConversaciones.Clear();
@@ -98,9 +101,9 @@ namespace infraestructura.repositorios
 
 			var dic = new Dictionary<int, List<Comentario>>();
 			dic.Add(conversacionAnterior.NumeroConversacion, listaConversaciones);
-			lista.Add(dic);
+			resultado.Add(dic);
 
-			return AgregarUsuarioEmisoresYReceptores(lista);
+			return AgregarUsuarioEmisoresYReceptores(resultado);
 		}
 
         public void Guardar(Comentario comentario)
@@ -124,23 +127,17 @@ namespace infraestructura.repositorios
 		private void ObtenerNumeroConversacion(Comentario comentario)
 		{
 			var numeroConversacion = _contexto
-				.Comentario.Where(x => x.IdPublicacion == comentario.IdPublicacion 
-				&& (x.IdUsuarioEmisor == comentario.IdUsuarioEmisor && x.IdUsuarioReceptor == comentario.IdUsuarioReceptor)  ||
-				 (x.IdUsuarioEmisor == comentario.IdUsuarioReceptor && x.IdUsuarioReceptor == comentario.IdUsuarioEmisor))
+				.Comentario.Where(
+					x => x.IdPublicacion == comentario.IdPublicacion &&
+					(x.IdUsuarioEmisor == comentario.IdUsuarioEmisor && x.IdUsuarioReceptor == comentario.IdUsuarioReceptor)  ||
+					(x.IdUsuarioEmisor == comentario.IdUsuarioReceptor && x.IdUsuarioReceptor == comentario.IdUsuarioEmisor)
+				 )
 				.FirstOrDefault();
 
 			if (numeroConversacion == null)
 			{
-				var num = _contexto.Comentario.OrderByDescending(x => x.NumeroConversacion).FirstOrDefault() == null ? 1 : _contexto.Comentario.OrderByDescending(x => x.NumeroConversacion).First().NumeroConversacion;
-
-				if(num == 1)
-				{
-					comentario.NumeroConversacion = 1;
-				}
-				else
-				{
-					comentario.NumeroConversacion =  num++;
-				}
+				var num = _contexto.Comentario.OrderByDescending(x => x.NumeroConversacion).FirstOrDefault() == null ? 1 : _contexto.Comentario.OrderByDescending(x => x.NumeroConversacion).First().NumeroConversacion +1;
+				comentario.NumeroConversacion = num;
 			}
 			else
 			{
@@ -153,7 +150,6 @@ namespace infraestructura.repositorios
 		{
 			var listadoViewModel = new List<Dictionary<int, List<ComentarioViewModel>>>();
 			var itemViewModel = new Dictionary<int, List<ComentarioViewModel>>();
-			var temp = new Dictionary<int, List<ComentarioViewModel>>();
 
 			foreach(var diccionario in lista)
 			{
@@ -163,7 +159,7 @@ namespace infraestructura.repositorios
 					itemViewModel.Add(item.Key, MapearComentario(item.Value));	
 				};
 
-				temp = itemViewModel;
+				Dictionary<int, List<ComentarioViewModel>> temp = new Dictionary<int, List<ComentarioViewModel>>(itemViewModel);
 				listadoViewModel.Add(temp);
 			}
 
