@@ -63,5 +63,10 @@ namespace aplicacion.servicios
 			return _tesoroRepository.ObtenerIdPublicacionPorIdTesoro(id);
 		}
 
+		public void CambiarEstadoTesoro(int idTesoro, int idEstado)
+		{ 
+			_tesoroRepository.CambiarEstadoTesoro(idTesoro, idEstado);
+		}
+
 	}
 }

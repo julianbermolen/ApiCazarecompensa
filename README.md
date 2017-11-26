@@ -54,6 +54,7 @@ Obtener todos los tesoros: GET  api/tesoros/obtener
 Obtener tesoro por IdTesoro: GET api/tesoros/obtener/{id} donde id: int
 Eliminar tesoro por IdTesoro: DELETE api/tesoros/eliminar/{id} donde id: int
 Obtener IdPublicacion por IdTesoro: GET /api/tesoros/ObtenerIdPublicacionPorIdTesoro/{id} donde id:int
+Cambiar estado de tesoro: POST /api/tesoros/CambiarEstadoTesoro  params: idTesoro:int , idEstado:int  Estados : Activo = 1 (default); Finalizado = 2 ; Cancelado = 3.
 ```
 
 ### Comentarios

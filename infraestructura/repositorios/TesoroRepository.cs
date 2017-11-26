@@ -118,6 +118,18 @@ namespace infraestructura.repositorios
 			}
 		}
 
+		public void CambiarEstadoTesoro(int idTesoro, int idEstado)
+		{
+			var tesoro = _contexto.Tesoro.FirstOrDefault(x => x.IdTesoro == idTesoro);
+
+			if(tesoro == null) throw new Exception("El tesoro no existe en la bd");
+
+			tesoro.IdTesoroEstado = idEstado;
+
+			_contexto.Entry(tesoro).State =  EntityState.Modified;
+			_contexto.SaveChanges();
+
+		}
 		private string GenerarPath(string nombreImagen)
 		{
 			return string.Format("http://li1166-116.members.linode.com/tesoros/{0}", nombreImagen);

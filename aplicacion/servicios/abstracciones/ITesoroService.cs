@@ -12,6 +12,6 @@ namespace aplicacion.servicios.abstracciones
          Tesoro Guardar(Tesoro tesoro);
          void Eliminar(int id);
          int ObtenerIdPublicacionPorIdTesoro(int id);
-         
+         void CambiarEstadoTesoro(int idTesoro, int idEstado);
     }
 }
