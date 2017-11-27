@@ -4,6 +4,9 @@ using System.Linq;
 using infraestructura.entidades;
 using infraestructura.repositorios.abstracciones;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using SixLabors.ImageSharp;
 
 namespace infraestructura.repositorios
 {
@@ -11,13 +14,16 @@ namespace infraestructura.repositorios
 	{
         private readonly Contexto _contexto;
 		private readonly IUsuarioRepository _usuarioRepository;
+		private readonly IHostingEnvironment _env;
 		private readonly IPublicacionRepository _publicacionRepository;
 
-		public ComentarioRepository(Contexto contexto, IUsuarioRepository usuarioRepository, IPublicacionRepository publicacionRepository)
+		public ComentarioRepository(Contexto contexto, IUsuarioRepository usuarioRepository, IPublicacionRepository publicacionRepository,
+		IHostingEnvironment env)
 		{
             _contexto = contexto;
 			_usuarioRepository = usuarioRepository;
 			_publicacionRepository = publicacionRepository;
+			_env = env;
 		}
 
         public List<Comentario> ObtenerTodos()
@@ -110,6 +116,8 @@ namespace infraestructura.repositorios
 		{
 			comentario.FechaCarga = DateTime.Now;
 
+			GuardarImagenEnDisco(comentario);
+
 			ObtenerNumeroConversacion(comentario);
 
 			_contexto.Comentario.Add(comentario);
@@ -193,6 +201,34 @@ namespace infraestructura.repositorios
 			}
 
 			return listadoNuevo;
+		} 
+
+		private void GuardarImagenEnDisco(Comentario comentario)
+		{
+			var webRoot = _env.WebRootPath;
+			var PathWithFolderName = System.IO.Path.Combine(webRoot, "comentarios");
+
+
+			if (!Directory.Exists(PathWithFolderName))
+			{
+				DirectoryInfo di = Directory.CreateDirectory(PathWithFolderName);
+			}
+
+			if(!string.IsNullOrEmpty(comentario.Imagen))
+			{
+				var imagen = comentario.Imagen.Replace("data:image/jpeg;base64,", string.Empty);
+
+				using (Image<Rgba32> image = Image.Load<Rgba32>(Convert.FromBase64String(imagen)))
+				{
+					image.Save(string.Format("{0}/{1}.jpg", PathWithFolderName, comentario.IdComentario));
+				}
+				comentario.Imagen = GenerarPath(comentario.IdComentario + ".jpg");
+			}
+		}
+
+		private string GenerarPath(string nombreImagen)
+		{
+			return string.Format("http://li1166-116.members.linode.com/comentarios/{0}", nombreImagen);
 		}
 
 	}
