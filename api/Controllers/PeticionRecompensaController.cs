@@ -79,12 +79,17 @@ namespace api.Controllers
 
             try
             {
-                _peticionRecompensaService.Guardar(peticion);
-                return Json(new Respuesta{});
+                if(!_peticionRecompensaService.ObtenerTodas().Any(p => p.IdUsuario == peticion.IdUsuario && p.IdTesoro == peticion.IdTesoro))
+                {
+                    _peticionRecompensaService.Guardar(peticion);
+                    return Json(new Respuesta{Exito = true});
+                }
+                return Json(new Respuesta{ Exito = false, Mensaje = "La petición ya existe"});
+                
             }
             catch(Exception e)
             {
-                return Json(new Respuesta{});
+                return Json(new Respuesta{Exito = false, Mensaje = e.Message});
             }
         }
         
