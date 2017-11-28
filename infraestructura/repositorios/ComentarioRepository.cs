@@ -220,7 +220,11 @@ namespace infraestructura.repositorios
 
 			if(!string.IsNullOrEmpty(comentario.Imagen))
 			{
-				var imagen = comentario.Imagen.Replace("data:image/jpeg;base64,", string.Empty);
+				var imagen = comentario.Imagen
+					.Replace("data:image/jpeg;base64,", string.Empty)
+					.Replace("data:image/png;base64,", string.Empty)
+					.Replace('-', '+')
+					.Replace('_', '/');
 
 				using (Image<Rgba32> image = Image.Load<Rgba32>(Convert.FromBase64String(imagen)))
 				{

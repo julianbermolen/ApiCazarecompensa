@@ -107,7 +107,11 @@ namespace infraestructura.repositorios
 			{
 				if(!string.IsNullOrEmpty(encoding.Value))
 				{
-					var imagen = encoding.Value.Replace("data:image/jpeg;base64,", string.Empty);
+					var imagen = encoding.Value
+						.Replace("data:image/jpeg;base64,", string.Empty)
+						.Replace("data:image/png;base64,", string.Empty)
+						.Replace('-', '+')
+						.Replace('_', '/');
 
 					using (Image<Rgba32> image = Image.Load<Rgba32>(Convert.FromBase64String(imagen)))
 					{
