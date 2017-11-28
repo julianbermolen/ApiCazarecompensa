@@ -116,12 +116,16 @@ namespace infraestructura.repositorios
 		{
 			comentario.FechaCarga = DateTime.Now;
 
-			GuardarImagenEnDisco(comentario);
-
 			ObtenerNumeroConversacion(comentario);
 
 			_contexto.Comentario.Add(comentario);
-            _contexto.SaveChanges();
+
+			_contexto.SaveChanges();
+
+			GuardarImagenEnDisco(comentario);
+
+            _contexto.Entry(comentario).State = EntityState.Modified;
+			_contexto.SaveChanges();
 		}
 
 		public void CambiarAComentarioLeido(int idComentario)
