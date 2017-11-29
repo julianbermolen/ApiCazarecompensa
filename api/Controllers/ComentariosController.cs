@@ -62,7 +62,7 @@ namespace api.Controllers
         }
 
         [HttpPost("guardar")]
-        public JsonResult GuardarPublicacion(Comentario comentario)
+        public JsonResult GuardarComentario(Comentario comentario)
         {
             try
             {

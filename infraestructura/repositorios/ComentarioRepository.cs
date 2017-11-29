@@ -114,6 +114,9 @@ namespace infraestructura.repositorios
 
         public void Guardar(Comentario comentario)
 		{
+			var encodingImagen = comentario.Imagen;
+			comentario.Imagen = null;
+
 			comentario.FechaCarga = DateTime.Now;
 
 			ObtenerNumeroConversacion(comentario);
@@ -122,7 +125,7 @@ namespace infraestructura.repositorios
 
 			_contexto.SaveChanges();
 
-			GuardarImagenEnDisco(comentario);
+			GuardarImagenEnDisco(comentario, encodingImagen);
 
             _contexto.Entry(comentario).State = EntityState.Modified;
 			_contexto.SaveChanges();
@@ -207,7 +210,7 @@ namespace infraestructura.repositorios
 			return listadoNuevo;
 		} 
 
-		private void GuardarImagenEnDisco(Comentario comentario)
+		private void GuardarImagenEnDisco(Comentario comentario, string encodingImagen)
 		{
 			var webRoot = _env.WebRootPath;
 			var PathWithFolderName = System.IO.Path.Combine(webRoot, "comentarios");
@@ -218,9 +221,9 @@ namespace infraestructura.repositorios
 				DirectoryInfo di = Directory.CreateDirectory(PathWithFolderName);
 			}
 
-			if(!string.IsNullOrEmpty(comentario.Imagen))
+			if(!string.IsNullOrEmpty(encodingImagen))
 			{
-				var imagen = comentario.Imagen
+				var imagen = encodingImagen
 					.Replace("data:image/jpeg;base64,", string.Empty)
 					.Replace("data:image/png;base64,", string.Empty)
 					.Replace('-', '+')
