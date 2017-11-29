@@ -22,7 +22,11 @@ Ya se encuentra la api en producción: http://li1166-116.members.linode.com/
 ```sh
 Ejemplo: http://li1166-116.members.linode.com/api/comentarios/obtener
 ```
-
+# Comandos útiles
+## Log errores
+```
+sudo journalctl -fu apicazarecompensas.service --since today (--since "one hour ago", etc)
+```
 
 # Endpoints
 
